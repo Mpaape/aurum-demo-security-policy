@@ -1,0 +1,21 @@
+# security-policy/.aurumcode/config.yml — mantido pelo time de segurança.
+# Vale para todo serviço que aponta para este repositório (policy_repository):
+# o serviço não consegue afrouxar nada do que está aqui.
+gate:
+  fail_on: [error]        # achado error (modelo, skill ou ferramenta) reprova o merge
+  inconclusive: block     # revisão que não concluiu nunca aprova
+ignore:
+  - "**/*.min.js"         # arquivo gerado não passa pela revisão de código
+  - "**/vendor/**"
+review:
+  language: pt-BR         # o idioma do parecer é decisão da segurança
+# As regras do time de segurança ficam em skills/<nome>/SKILL.md (aqui: ia,
+# com IA-001 e IA-002). Uma exceção aprovada também mora aqui, nunca no
+# serviço: seis campos obrigatórios, com dono e validade, por exemplo
+#   exceptions:
+#     - repo: voce/assistente
+#       rule: analysis/hardcoded-secret
+#       path: tests/fixtures/resposta.json
+#       owner: time-seguranca
+#       reason: fixture de teste, sem credencial real
+#       expires: 2027-06-30
